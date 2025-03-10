@@ -1,0 +1,39 @@
+[
+  {
+    "id": "ce778ef5-fca8-4812-8a56-7598764c2435",
+    "title": "Quie es naruto uzumaki",
+    "content": "This is the content of my first blog post.",
+    "category": "Technology",
+    "tags": ["Tech"],
+    "createdAt": "2025-03-10T22:34:00.287Z",
+    "updatedAt": "2025-03-10T22:41:44.144Z"
+  },
+
+  {
+    "id": "ce778ef5-fca8-4812-8a56-7598764c2785",
+    "title": "The planet earth",
+    "content": "The planet earth is the third planet from the sun.",
+    "category": "Science",
+    "tags": ["Science"],
+    "createdAt": "2025-03-10T22:34:00.287Z",
+    "updatedAt": "2025-03-10T22:41:44.144Z"
+  },
+  {
+    "id": "ce778ef5-fca8-4812-8a56-7598764c2234",
+    "title": "The planet mars",
+    "content": "The planet mars is the fourth planet from the sun.",
+    "category": "Science",
+    "tags": ["Science"],
+    "createdAt": "2025-03-10T22:34:00.287Z",
+    "updatedAt": "2025-03-10T22:41:44.144Z"
+  },
+  {
+    "id": "ce778ef5-fca8-4812-8a56-7598764c2435",
+    "title": "The importance of Science",
+    "content": "Science is the study of the natural world.",
+    "category": "Topic",
+    "tags": ["History"],
+    "createdAt": "2025-03-10T22:34:00.287Z",
+    "updatedAt": "2025-03-10T22:41:44.144Z"
+  }
+]

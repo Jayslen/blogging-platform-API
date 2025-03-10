@@ -2,56 +2,52 @@ import fs from 'node:fs/promises'
 import { createRequire } from 'node:module'
 
 const require = createRequire(import.meta.url)
-const data = require('./posts.json')
+const postJSON = require('./posts.json')
 
 export class PostModel {
-  constructor () {
-    this.data = require('./posts.json')
-  }
-
   static createPost = async ({ input }) => {
     const id = crypto.randomUUID()
     const createdAt = new Date()
-    data.push({ id, ...input, createdAt, updatedAt: createdAt })
+    postJSON.push({ id, ...input, createdAt, updatedAt: createdAt })
     try {
-      await fs.writeFile('./posts.json', JSON.stringify(data))
+      await fs.writeFile('./posts.json', JSON.stringify(postJSON))
     } catch {
       throw new Error('Something went wrong when writing the data')
     }
 
-    return data[data.length - 1]
+    return postJSON[postJSON.length - 1]
   }
 
   static updatePost = async ({ id, input }) => {
-    const currentPostId = data.findIndex(post => post.id === id)
+    const currentPostId = postJSON.findIndex(post => post.id === id)
 
     if (currentPostId === -1) {
       throw new Error('No post found with the id provided')
     }
 
-    data[currentPostId] = { ...data[currentPostId], ...input, updatedAt: new Date() }
+    postJSON[currentPostId] = { ...postJSON[currentPostId], ...input, updatedAt: new Date() }
 
     try {
-      await fs.writeFile('./posts.json', JSON.stringify(data))
+      await fs.writeFile('./posts.json', JSON.stringify(postJSON))
     } catch {
       throw new Error('Something went wrong when writing the data')
     }
 
-    return data[currentPostId]
+    return postJSON[currentPostId]
   }
 
   static deletePost = async ({ id }) => {
-    const currentPostId = data.findIndex(post => post.id === id)
+    const currentPostId = postJSON.findIndex(post => post.id === id)
 
     if (currentPostId === -1) {
       throw new Error('No post found with the id provided')
     }
 
-    const postDeleted = data[currentPostId]
-    data.splice(currentPostId, 1)
+    const postDeleted = postJSON[currentPostId]
+    postJSON.splice(currentPostId, 1)
 
     try {
-      await fs.writeFile('./posts.json', JSON.stringify(data))
+      await fs.writeFile('./posts.json', JSON.stringify(postJSON))
     } catch {
       throw new Error('Something went wrong when writing the data')
     }
@@ -60,7 +56,7 @@ export class PostModel {
   }
 
   static getPostById = async ({ id }) => {
-    const currentPost = data.find(post => post.id === id)
+    const currentPost = postJSON.find(post => post.id === id)
 
     if (!currentPost) {
       throw new Error('No post found with the id provided')
@@ -69,7 +65,15 @@ export class PostModel {
     return currentPost
   }
 
-  static getAllPost = async () => {
-    return data
+  static getAllPost = async ({ term }) => {
+    if (term) {
+      return postJSON.filter(({ title, content, category }) => {
+        return [title, content, category].some(key =>
+          key.toLowerCase().includes(term.toLowerCase())
+
+        )
+      })
+    }
+    return postJSON
   }
 }

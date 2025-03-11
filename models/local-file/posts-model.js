@@ -1,8 +1,10 @@
 import fs from 'node:fs/promises'
 import { createRequire } from 'node:module'
+import { join } from 'path'
 
 const require = createRequire(import.meta.url)
 const postJSON = require('./posts.json')
+const jsonPath = join(process.cwd(), '/models/local-file/posts.json')
 
 export class PostModel {
   static createPost = async ({ input }) => {
@@ -10,7 +12,7 @@ export class PostModel {
     const createdAt = new Date()
     postJSON.push({ id, ...input, createdAt, updatedAt: createdAt })
     try {
-      await fs.writeFile('./posts.json', JSON.stringify(postJSON))
+      await fs.writeFile(jsonPath, JSON.stringify(postJSON))
     } catch {
       throw new Error('Something went wrong when writing the data')
     }
@@ -28,7 +30,7 @@ export class PostModel {
     postJSON[currentPostId] = { ...postJSON[currentPostId], ...input, updatedAt: new Date() }
 
     try {
-      await fs.writeFile('./posts.json', JSON.stringify(postJSON))
+      await fs.writeFile(jsonPath, JSON.stringify(postJSON))
     } catch {
       throw new Error('Something went wrong when writing the data')
     }
@@ -47,7 +49,7 @@ export class PostModel {
     postJSON.splice(currentPostId, 1)
 
     try {
-      await fs.writeFile('./posts.json', JSON.stringify(postJSON))
+      await fs.writeFile(jsonPath, JSON.stringify(postJSON))
     } catch {
       throw new Error('Something went wrong when writing the data')
     }

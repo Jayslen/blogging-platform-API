@@ -1,6 +1,7 @@
 import fs from 'node:fs/promises'
 import { createRequire } from 'node:module'
 import { join } from 'path'
+import { WriteFileError, ResourceNotFoundError } from '../../schemas/Error.js'
 
 const require = createRequire(import.meta.url)
 const postJSON = require('./posts.json')
@@ -11,10 +12,11 @@ export class PostModel {
     const id = crypto.randomUUID()
     const createdAt = new Date()
     postJSON.push({ id, ...input, createdAt, updatedAt: createdAt })
+
     try {
       await fs.writeFile(jsonPath, JSON.stringify(postJSON))
     } catch {
-      throw new Error('Something went wrong when writing the data')
+      throw new WriteFileError()
     }
 
     return postJSON[postJSON.length - 1]
@@ -24,7 +26,7 @@ export class PostModel {
     const currentPostId = postJSON.findIndex(post => post.id === id)
 
     if (currentPostId === -1) {
-      throw new Error('No post found with the id provided')
+      throw new ResourceNotFoundError()
     }
 
     postJSON[currentPostId] = { ...postJSON[currentPostId], ...input, updatedAt: new Date() }
@@ -32,7 +34,7 @@ export class PostModel {
     try {
       await fs.writeFile(jsonPath, JSON.stringify(postJSON))
     } catch {
-      throw new Error('Something went wrong when writing the data')
+      throw new WriteFileError()
     }
 
     return postJSON[currentPostId]
@@ -42,7 +44,7 @@ export class PostModel {
     const currentPostId = postJSON.findIndex(post => post.id === id)
 
     if (currentPostId === -1) {
-      throw new Error('No post found with the id provided')
+      throw new ResourceNotFoundError()
     }
 
     const postDeleted = postJSON[currentPostId]
@@ -51,7 +53,7 @@ export class PostModel {
     try {
       await fs.writeFile(jsonPath, JSON.stringify(postJSON))
     } catch {
-      throw new Error('Something went wrong when writing the data')
+      throw new WriteFileError()
     }
 
     return postDeleted
@@ -61,7 +63,7 @@ export class PostModel {
     const currentPost = postJSON.find(post => post.id === id)
 
     if (!currentPost) {
-      throw new Error('No post found with the id provided')
+      throw new ResourceNotFoundError()
     }
 
     return currentPost

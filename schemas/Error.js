@@ -20,10 +20,10 @@ class ResourceNotFoundError extends RequestError {
 }
 
 class ValidationError extends RequestError {
-  constructor (errors, message = 'Errors found while parsing the data') {
+  constructor (conflicts, message = 'Errors found while parsing the data') {
     super(message, 400)
     this.name = 'ValidationError'
-    this.conflict = errors
+    this.conflicts = conflicts
   }
 }
 

@@ -1,3 +1,17 @@
+function sendErrorAsResponse (res, error) {
+  const { name, statusCode, message, conflicts } = error
+  const response = {
+    errorName: name, message, code: statusCode
+  }
+
+  if (conflicts) {
+    response.conflics = conflicts
+  }
+
+  console.error(error)
+  res.status(error.statusCode).json(response)
+}
+
 class RequestError extends Error {
   constructor (message, statusCode, name) {
     super(message)
@@ -28,5 +42,6 @@ class ValidationError extends RequestError {
 export {
   WriteFileError,
   ResourceNotFoundError,
-  ValidationError
+  ValidationError,
+  sendErrorAsResponse
 }

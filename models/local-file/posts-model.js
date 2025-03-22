@@ -1,5 +1,6 @@
 import fs from 'node:fs/promises'
 import { createRequire } from 'node:module'
+import { randomUUID } from 'node:crypto'
 import { join } from 'path'
 import { WriteFileError, ResourceNotFoundError } from '../../schemas/Error.js'
 
@@ -9,7 +10,7 @@ const jsonPath = join(process.cwd(), '/models/local-file/posts.json')
 
 export class PostModel {
   static createPost = async ({ input }) => {
-    const id = crypto.randomUUID()
+    const id = randomUUID()
     const createdAt = new Date()
     postJSON.push({ id, ...input, createdAt, updatedAt: createdAt })
 

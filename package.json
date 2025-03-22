@@ -4,7 +4,7 @@
   "main": "index.js",
   "type": "module",
   "scripts": {
-    "test": "echo \"Error: no test specified\" && exit 1",
+    "test": "vitest",
     "start:server": "node --watch app.js"
   },
   "keywords": [],
@@ -13,10 +13,12 @@
   "description": "",
   "dependencies": {
     "express": "4.21.2",
+    "supertest": "^7.1.0",
     "zod": "3.24.2"
   },
   "devDependencies": {
-    "standard": "17.1.2"
+    "standard": "17.1.2",
+    "vitest": "^3.0.9"
   },
   "eslintConfig": {
     "extends": "standard"

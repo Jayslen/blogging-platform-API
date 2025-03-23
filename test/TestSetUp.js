@@ -18,6 +18,11 @@ class TestProperties {
       'title',
       'updatedAt'
     ].sort()
+    this.update = {
+      title: 'La leyenda de Zelda',
+      category: 'videojuegos',
+      tags: ['videojuegos', 'Nintendo']
+    }
   }
 }
 

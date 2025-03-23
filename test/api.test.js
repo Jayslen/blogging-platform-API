@@ -1,7 +1,7 @@
 import { expect, test, describe } from 'vitest'
 import request from 'supertest'
-import { validatePost } from '../schemas/validations.js'
 import app from '../app.js'
+import { validatePost } from '../schemas/validations.js'
 import { LocalFileTestSetUp } from './TestSetUp.js'
 
 const TEST_VALUES = await new LocalFileTestSetUp().init()
@@ -55,5 +55,28 @@ describe('DELETE /posts/:id', () => {
     expect(res.status).toBe(201)
     expect(postsKey).toEqual(postsKey)
     expect(res.body.id).toBe(TEST_VALUES.removedId)
+  })
+})
+
+describe('PUT /posts/:id', () => {
+  test('The post should have the user\'s properties', async () => {
+    const res = await request(app).put(`/posts/${TEST_VALUES.id}`).send(TEST_VALUES.update)
+    const updatedPostValues = Object.values(res.body)
+
+    const success = Object.values(TEST_VALUES.update).every((value) => {
+      if (typeof value === 'object') {
+        return value.every((tag) => res.body.tags.includes(tag))
+      }
+      return updatedPostValues.includes(value)
+    })
+
+    expect(success).toBe(true)
+  })
+
+  test('Should return a 201 status and the post updated', async () => {
+    const res = await request(app).put(`/posts/${TEST_VALUES.id}`).send(TEST_VALUES.update)
+
+    expect(res.status).toBe(201)
+    expect(res.body.id).toBe(TEST_VALUES.id)
   })
 })

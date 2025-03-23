@@ -1,39 +1,36 @@
 [
   {
-    "id": "ce778ef5-fca8-4812-8a56-7598764c2435",
-    "title": "Quie es naruto uzumaki",
+    "id": "f3b1b3b4-3b3b-4b3b-8b3b-3b3b3b3b3b3b",
+    "title": "Super Mario Bros",
+    "content": "This is the content of my second blog post.",
+    "category": "videojuegos",
+    "tags": ["videojuegos", "Nintendo"],
+    "createdAt": "2025-03-23T00:29:34.283Z",
+    "updatedAt": "2025-03-23T00:42:41.930Z"
+  },
+  {
+    "id": "3b3b3b3b-3b3b-3b3b-3b3b-3b3b3b3b3b3b",
+    "title": "Donkey Kong",
+    "content": "This is the content of my third blog post.",
+    "category": "videojuegos",
+    "tags": ["videojuegos", "Nintendo"],
+    "createdAt": "2025-03-23T00:29:34.283Z",
+    "updatedAt": "2025-03-23T00:42:41.930Z"
+  },
+  {
+    "title": "Tha NASA",
     "content": "This is the content of my first blog post.",
-    "category": "Technology",
-    "tags": ["Tech"],
-    "createdAt": "2025-03-10T22:34:00.287Z",
-    "updatedAt": "2025-03-10T22:41:44.144Z"
-  },
-
-  {
-    "id": "ce778ef5-fca8-4812-8a56-7598764c2785",
-    "title": "The planet earth",
-    "content": "The planet earth is the third planet from the sun.",
-    "category": "Science",
-    "tags": ["Science"],
-    "createdAt": "2025-03-10T22:34:00.287Z",
-    "updatedAt": "2025-03-10T22:41:44.144Z"
+    "category": "ciencia",
+    "tags": ["ciencia", "NASA"],
+    "createdAt": "2025-03-23T00:29:34.283Z",
+    "updatedAt": "2025-03-23T00:42:41.930Z"
   },
   {
-    "id": "ce778ef5-fca8-4812-8a56-7598764c2234",
-    "title": "The planet mars",
-    "content": "The planet mars is the fourth planet from the sun.",
-    "category": "Science",
-    "tags": ["Science"],
-    "createdAt": "2025-03-10T22:34:00.287Z",
-    "updatedAt": "2025-03-10T22:41:44.144Z"
-  },
-  {
-    "id": "ce778ef5-fca8-4812-8a56-7598764c2435",
-    "title": "The importance of Science",
-    "content": "Science is the study of the natural world.",
-    "category": "Topic",
-    "tags": ["History"],
-    "createdAt": "2025-03-10T22:34:00.287Z",
-    "updatedAt": "2025-03-10T22:41:44.144Z"
+    "title": "The SpaceX",
+    "content": "This is the content of my fourth blog post.",
+    "category": "ciencia",
+    "tags": ["ciencia", "SpaceX"],
+    "createdAt": "2025-03-23T00:29:34.283Z",
+    "updatedAt": "2025-03-23T00:42:41.930Z"
   }
 ]

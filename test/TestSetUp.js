@@ -24,11 +24,17 @@ class TestProperties {
 export class LocalFileTestSetUp extends TestProperties {
   constructor () {
     super()
-    this.id = this.#getRamdomId()
-    this.removedId = this.#getRamdomId()
+    this.id = null
+    this.removedId = null
   }
 
-  async #getRamdomId () {
+  async init () {
+    this.id = await this.#getRandomId()
+    this.removedId = await this.#getRandomId()
+    return this
+  }
+
+  #getRandomId = async () => {
     try {
       const posts = JSON.parse(await fs.readFile(path.join(process.cwd(), 'models/local-file/posts.json'), 'utf-8'))
       return posts[Math.floor(Math.random() * posts.length)].id

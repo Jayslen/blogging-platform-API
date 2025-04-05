@@ -5,7 +5,9 @@
   "type": "module",
   "scripts": {
     "test": "vitest",
-    "start:server": "node --watch app.js"
+    "test:GET": "vitest ./test/GET.test.js",
+    "start:server": "node --watch --env-file=.env app.js",
+    "mongo:start": "node --env-file=.env ./models/mongoDB/posts-model.js"
   },
   "keywords": [],
   "author": "",
@@ -13,6 +15,7 @@
   "description": "",
   "dependencies": {
     "express": "4.21.2",
+    "mongodb": "^6.15.0",
     "supertest": "^7.1.0",
     "zod": "3.24.2"
   },

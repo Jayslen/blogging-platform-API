@@ -1,5 +1,6 @@
 function sendErrorAsResponse (res, error) {
-  console.error(error.origin ?? error)
+  if (error.origin) console.error(error.origin)
+
   const { name, statusCode = 500, message, conflicts } = error
   const response = {
     errorName: name, message, code: statusCode

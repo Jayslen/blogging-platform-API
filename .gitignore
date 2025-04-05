@@ -1,2 +1,7 @@
 node_modules
 dist
+.env
+test
+models/mongoDB/playground-1.mongoDB.js
+test.js
+query.mongodb.js

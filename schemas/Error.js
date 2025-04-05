@@ -1,5 +1,6 @@
 function sendErrorAsResponse (res, error) {
-  const { name, statusCode, message, conflicts } = error
+  console.error(error.origin ?? error)
+  const { name, statusCode = 500, message, conflicts } = error
   const response = {
     errorName: name, message, code: statusCode
   }
@@ -8,15 +9,15 @@ function sendErrorAsResponse (res, error) {
     response.conflics = conflicts
   }
 
-  console.error(error)
-  res.status(error.statusCode).json(response)
+  res.status(error.statusCode ?? 500).json(response)
 }
 
 class RequestError extends Error {
-  constructor (message, statusCode, name) {
+  constructor (message, statusCode, name, origin) {
     super(message)
     this.statusCode = statusCode
     this.name = name
+    this.origin = origin
   }
 }
 
@@ -39,9 +40,16 @@ class ValidationError extends RequestError {
   }
 }
 
+class InternalError extends RequestError {
+  constructor (origin, message = 'An unexpetec error has happend') {
+    super(message, 500, 'Internal Error', origin)
+  }
+}
+
 export {
   WriteFileError,
   ResourceNotFoundError,
   ValidationError,
+  InternalError,
   sendErrorAsResponse
 }

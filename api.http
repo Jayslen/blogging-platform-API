@@ -1,1 +1,31 @@
-GET http://localhost:3000
+# Create a post 
+POST http://localhost:3000/posts
+Content-Type: application/json
+
+{
+  "id": "e2949968-2adc-4f29-8de6-1106420fab7a",
+    "title": "Post example 32",
+    "content": "This is the content of my first blog post.",
+    "category": "Test",
+    "tags": ["Test"],
+    "createdAt": "2025-03-11T23:24:41.851Z",
+    "updatedAt": "2025-03-11T23:24:41.851Z"
+}
+
+### GET
+GET http://localhost:3000/posts/fe45c7ae-c34a-46b3-b964-623dfe38772
+
+
+### UPDATE
+PUT http://localhost:3000/posts/fe45c7ae-c34a-46b3-b964-623dfe38772
+Content-Type: application/json
+
+{
+  "title": "Who am i?",
+  "content": "My name is jaylen rojas serranos."
+}
+
+
+### DELETE
+
+DELETE http://localhost:3000/posts/ce778ef5-fca8-4812-8a56-7598764c2234

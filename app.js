@@ -1,19 +1,17 @@
 import express, { json } from 'express'
-import { postRouter } from './routes/posts.js'
+import { createPostRouter } from './routes/posts.js'
 
-const app = express()
-const port = 3000
+export function createServer ({ PostModel }) {
+  const app = express()
+  const port = 3000
 
-app.use(json())
+  app.use(json())
+  app.use('/posts', createPostRouter({ PostModel }))
+  app.use((req, res) => {
+    res.status(404).json({ error: 'Path not found' })
+  })
 
-app.get('/', (req, res) => {
-  res.send('<h1>Hello World!</h1>')
-})
-
-app.use('/posts', postRouter)
-
-app.listen(port, () => {
-  console.log(`Server is running on port http://localhost:${port}`)
-})
-
-export default app
+  app.listen(port, () => {
+    console.log(`Server is running on port http://localhost:${port}`)
+  })
+}

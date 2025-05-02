@@ -1,29 +1,32 @@
-import { PostModel } from '../models/local-file/posts-model'
-import { sendErrorAsResponse, ValidationError } from '../schemas/Error'
-import { validatePartialPost, validatePost } from '../schemas/validations'
+import { sendErrorAsResponse, ValidationError } from '../schemas/Error.js'
+import { validatePartialPost, validatePost } from '../schemas/validations.js'
 
 export class PostControl {
-  static async getAllPost (req, res) {
+  constructor ({ PostModel }) {
+    this.PostModel = PostModel
+  }
+
+  getAllPost = async (req, res) => {
     const { term } = req.query
 
     try {
-      res.json(await PostModel.getAllPost({ term }))
+      res.json(await this.PostModel.getAllPost({ term }))
     } catch (e) {
       sendErrorAsResponse(res, e)
     }
   }
 
-  static async getPostById (req, res) {
+  getPostById = async (req, res) => {
     const { id } = req.params
 
     try {
-      res.status(200).json(await PostModel.getPostById({ id }))
+      res.status(200).json(await this.PostModel.getPostById({ id }))
     } catch (e) {
       sendErrorAsResponse(res, e)
     }
   }
 
-  static async createPost (req, res) {
+  createPost = async (req, res) => {
     const parsedData = validatePost(req.body)
 
     if (!parsedData.success) {
@@ -41,13 +44,13 @@ export class PostControl {
     }
 
     try {
-      res.status(201).json(await PostModel.createPost({ input: parsedData.data }))
+      res.status(201).json(await this.PostModel.createPost({ input: parsedData.data }))
     } catch (e) {
       sendErrorAsResponse(res, e)
     }
   }
 
-  static async updatePost (req, res) {
+  updatePost = async (req, res) => {
     const parsedData = validatePartialPost(req.body)
     const { id } = req.params
 
@@ -65,17 +68,18 @@ export class PostControl {
     }
 
     try {
-      res.status(201).json(await PostModel.updatePost({ id, input: parsedData.data }))
+      res.status(201).json(await this.PostModel.updatePost({ id, input: parsedData.data }))
     } catch (e) {
+      console.error(e)
       sendErrorAsResponse(res, e)
     }
   }
 
-  static async deletePost (req, res) {
+  deletePost = async (req, res) => {
     const { id } = req.params
 
     try {
-      res.status(201).json(await PostModel.deletePost({ id }))
+      res.status(201).json(await this.PostModel.deletePost({ id }))
     } catch (e) {
       sendErrorAsResponse(res, e)
     }

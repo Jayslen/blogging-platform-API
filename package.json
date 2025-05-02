@@ -6,8 +6,8 @@
   "scripts": {
     "test": "vitest",
     "test:GET": "vitest ./test/GET.test.js",
-    "start:server": "node --watch --env-file=.env app.js",
-    "mongo:start": "node --env-file=.env ./models/mongoDB/posts-model.js"
+    "start:local": "node --watch --env-file=.env ./server-with-local.js",
+    "start:mongo": "node --watch --env-file=.env ./server-with-mongo.js"
   },
   "keywords": [],
   "author": "",

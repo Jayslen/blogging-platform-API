@@ -50,8 +50,20 @@ export class PostModel {
     }
   }
 
-  static deletePosts = async ({ id }) => {
+  static deletePost = async ({ id }) => {
+    const client = new MongoDB()
+    try {
+      await client.connect()
+      const collection = client.db
+      const post = await collection.findOne({ _id: new Binary(Buffer.from(id.replace(/-/g, ''), 'hex'), 4) })
 
+      if (!post) throw new ResourceNotFoundError()
+      await collection.deleteOne({ _id: new Binary(Buffer.from(id.replace(/-/g, ''), 'hex'), 4) })
+
+      return post
+    } catch (originError) {
+      throw new InternalError(originError)
+    }
   }
 
   static getPostById = async ({ id }) => {

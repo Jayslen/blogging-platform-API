@@ -1,5 +1,5 @@
 import { Binary } from 'mongodb'
-import { InternalError, ResourceNotFoundError } from '../../schemas/Error.js'
+import { InternalError, NoInputSend, ResourceNotFoundError } from '../../schemas/Error.js'
 import { MongoDB } from './MongoClient.js'
 import { randomUUID } from 'node:crypto'
 
@@ -24,6 +24,9 @@ export class PostModel {
   }
 
   static updatePost = async ({ id, input }) => {
+    if (Object.keys(input).length === 0) {
+      throw new NoInputSend()
+    }
     const client = new MongoDB()
     try {
       await client.connect()

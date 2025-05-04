@@ -2,7 +2,7 @@ import fs from 'node:fs/promises'
 import { createRequire } from 'node:module'
 import { randomUUID } from 'node:crypto'
 import { join } from 'path'
-import { WriteFileError, ResourceNotFoundError } from '../../schemas/Error.js'
+import { WriteFileError, ResourceNotFoundError, NoInputSend } from '../../schemas/Error.js'
 
 const require = createRequire(import.meta.url)
 const postJSON = require('./posts.json')
@@ -24,6 +24,9 @@ export class PostModel {
   }
 
   static updatePost = async ({ id, input }) => {
+    if (Object.keys(input).length === 0) {
+      throw new NoInputSend()
+    }
     const currentPostId = postJSON.findIndex(post => post.id === id)
 
     if (currentPostId === -1) {

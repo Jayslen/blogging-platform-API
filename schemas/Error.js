@@ -1,6 +1,5 @@
 function sendErrorAsResponse (res, error) {
   if (error.origin) console.error(error.origin)
-
   const { name, statusCode = 500, message, conflicts } = error
   const response = {
     errorName: name, message, code: statusCode
@@ -47,10 +46,17 @@ class InternalError extends RequestError {
   }
 }
 
+class NoInputSend extends RequestError {
+  constructor (message = 'User does not send data') {
+    super(message, 400, 'Bad request')
+  }
+}
+
 export {
   WriteFileError,
   ResourceNotFoundError,
   ValidationError,
   InternalError,
+  NoInputSend,
   sendErrorAsResponse
 }

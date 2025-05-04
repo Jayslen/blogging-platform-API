@@ -1,4 +1,4 @@
 import { createServer } from './app.js'
-import { PostModel } from './models/local-file/posts.js'
+import { PostModel } from './models/mysql/posts.js'
 
 createServer({ PostModel })

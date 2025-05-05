@@ -18,6 +18,11 @@ BLOGGING_API/
 ├── server-with-mongo.js     # Server setup using MongoDB
 ```
 The project includes a controller responsible for handling all user input. It performs data validation when necessary and delegates operations to the selected model. There are separate models for each storage method: one for the local file system, another for MongoDB and a soon to add MySql.
+
+## Test API
+You can test the endpoints of the api with the file called api.http. You need to have installed the following extension:
+-  [REST Client API](https://marketplace.visualstudio.com/items/?itemName=donebd.rest-client-api)
+
 ## Run Locally
 
 Clone the project

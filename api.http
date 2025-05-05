@@ -3,30 +3,23 @@ POST http://localhost:3000/posts
 Content-Type: application/json
 
 {
-    "title": "Planet Mercury",
-    "content": "Mercury is the closest planet to the sun.",
-    "category": "planet",
-    "tags": ["planet", "solar system"]
-  
+  "title": "Naruto Shippuden",
+  "content": "Naruto Shippuden is a Japanese anime series based on Masashi Kishimoto's manga series.",
+  "category": "anime",
+  "tags": ["anime", "action", "adventure"]
 }
 
-### GET
-GET http://localhost:3000/posts/15abf200-037c-4ae5-8abc-c704ed788edd
-
-###
-GET http://localhost:3000/posts?term=video
-
-
+### GET ALL POSTS
+GET http://localhost:3000/posts
+### GET SINGLE POST
+GET http://localhost:3000/posts/44dcaa91-2a03-11f0-b1cb-346f24a41da4
 ### UPDATE
-PUT http://localhost:3000/posts/15abf200-037c-4ae5-8abc-c704ed788edd
+PUT http://localhost:3000/posts/44dcaa91-2a03-11f0-b1cb-346f24a41da4
 Content-Type: application/json
 
 {
-  "title": "Who am i?",
-  "content": "My name is jaylen rojas serranos."
+  "title": "Amazings things about NodeJS",
+  "category": "productivity"
 }
-
-
-### DELETE
-
-DELETE http://localhost:3000/posts/44262047-8446-4b2c-b143-73a88a827710
+### DELETE POSTS
+DELETE http://localhost:3000/posts/11111111-1111-1111-1111-111111111111

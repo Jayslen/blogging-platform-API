@@ -10,7 +10,7 @@ BLOGGING_API/
 ├── controlls/               # Contains controller logic
 ├── models/                  # Data models for different storage methods
 ├── routes/                  # API route definitions
-├── schemas/                 # Validation schemas (e.g., with Joi or Yup)
+├── schemas/                 # Validation schemas (with ZOD)
 ├── .env                     # Environment variables
 ├── api.http                 # HTTP client requests for testing endpoints
 ├── app.js                   # Main app entry point
@@ -18,6 +18,11 @@ BLOGGING_API/
 ├── server-with-mongo.js     # Server setup using MongoDB
 ```
 The project includes a controller responsible for handling all user input. It performs data validation when necessary and delegates operations to the selected model. There are separate models for each storage method: one for the local file system, another for MongoDB and a soon to add MySql.
+
+## Test API
+You can test the endpoints of the api with the file called api.http. You need to have installed the following extension:
+-  [REST Client API](https://marketplace.visualstudio.com/items/?itemName=donebd.rest-client-api)
+
 ## Run Locally
 
 Clone the project
@@ -37,14 +42,30 @@ Install dependencies
 ```
 #### Run MongoDB server
 
-To run this project, you will need to add the following environment variables to your .env file
-
+To run the project with MongoDB, follow these steps:
+- Add the following environment variables to your .env file to configure the project correctly.
 `MONGO_URI`
 
 - Then run 
     ```bash
     npm run start:mongo
     ```
+
+#### Run MySql server
+
+To run the project with MySQL, follow these steps:
+- Create the database using the SQL script located in the models/mysql directory.
+- Add the following environment variables to your .env file to configure the project correctly.
+`MYSQL_HOST`
+`MYSQL_PORT`
+`MYSQL_USER`
+`MYSQL_DATABASE`
+
+- Then run 
+    ```bash
+    npm run start:mysql
+    ```
+
 
 ## API Reference
 
